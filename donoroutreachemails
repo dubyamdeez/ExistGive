@@ -1,0 +1,19 @@
+import openai
+
+def generate_donor_email(donor_name, last_donation, impact_summary):
+    prompt = f"""
+    Write a warm, engaging email for {donor_name}, thanking them for their generous past donation of ${last_donation}.
+    Mention their impact: {impact_summary}.
+    Invite them to a nonprofit appreciation event.
+    """
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    return response["choices"][0]["message"]["content"]
+
+# Example Usage
+email_text = generate_donor_email("Alice Johnson", 50000, "Funded 50 STEM scholarships.")
+print(email_text)
