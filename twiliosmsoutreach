@@ -1,0 +1,15 @@
+from twilio.rest import Client
+
+TWILIO_ACCOUNT_SID = "your_twilio_sid"
+TWILIO_AUTH_TOKEN = "your_twilio_auth_token"
+TWILIO_PHONE_NUMBER = "your_twilio_phone"
+
+client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+
+def send_sms(donor_phone, message):
+    response = client.messages.create(
+        body=message,
+        from_=TWILIO_PHONE_NUMBER,
+        to=donor_phone
+    )
+    return response.sid
